@@ -33,6 +33,5 @@ public class FiboB {
 
         return fibArr[n];
     }
-
 }
 

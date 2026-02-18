@@ -48,6 +48,5 @@ public class FiboC {
         return period.get((int)n % period.size());
     }
 
-
 }
 
