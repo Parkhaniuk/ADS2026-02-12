@@ -47,6 +47,5 @@ public class FiboC {
         ArrayList<Integer> period = calcPisanoPeriod(m);
         return period.get((int)n % period.size());
     }
-
 }
 
