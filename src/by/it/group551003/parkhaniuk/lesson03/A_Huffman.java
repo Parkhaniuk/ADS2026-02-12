@@ -62,25 +62,38 @@ public class A_Huffman {
         Scanner scanner = new Scanner(inputStream);
         String s = scanner.next();
 
-        //все комментарии от тестового решения были оставлены т.к. это задание A.
-        //если они вам мешают их можно удалить
-
+        char c;
         Map<Character, Integer> count = new HashMap<>();
-        //1. переберем все символы по очереди и рассчитаем их частоту в Map count
-        //для каждого символа добавим 1 если его в карте еще нет или инкремент если есть.
 
-        //2. перенесем все символы в приоритетную очередь в виде листьев
+        for (int i = 0; i < s.length(); i++) {
+            c = s.charAt(i);
+            if (count.containsKey(c))
+                count.put(c, count.get(c) + 1);
+            else
+                count.put(c, 1);
+        }
+
         PriorityQueue<Node> priorityQueue = new PriorityQueue<>();
 
-        //3. вынимая по два узла из очереди (для сборки родителя)
-        //и возвращая этого родителя обратно в очередь
-        //построим дерево кодирования Хаффмана.
-        //У родителя частоты детей складываются.
+        for (Map.Entry<Character, Integer> i : count.entrySet())
+            priorityQueue.add(new LeafNode(i.getValue(), i.getKey()));
 
-        //4. последний из родителей будет корнем этого дерева
-        //это будет последний и единственный элемент оставшийся в очереди priorityQueue.
+        while (priorityQueue.size() > 1) {
+            Node left = priorityQueue.poll();
+            Node right = priorityQueue.poll();
+
+            Node parent = new InternalNode(left, right);
+            priorityQueue.add(parent);
+        }
+
+        Node root = priorityQueue.poll();
+        root.fillCodes("");
+
         StringBuilder sb = new StringBuilder();
-        //.....
+
+        for (int i = 0; i < s.length(); i++) {
+            sb.append(codes.get(s.charAt(i)));
+        }
 
         return sb.toString();
         //01001100100111
