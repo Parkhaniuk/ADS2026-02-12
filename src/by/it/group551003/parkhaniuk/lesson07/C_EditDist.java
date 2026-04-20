@@ -65,7 +65,7 @@ public class C_EditDist {
                 if (i == 0)
                     matrix[i][j] = j;
                 else if (j == 0)
-                    matrix[i][j] = j;
+                    matrix[i][j] = i;
                 else {
                     cost = (one.charAt(i - 1) == two.charAt(j - 1)) ? 0 : 1;
                     D = matrix[i - 1][j];
